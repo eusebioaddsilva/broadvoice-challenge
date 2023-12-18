@@ -18,23 +18,18 @@ jobs:
         with:
           node-version: 14
           
-      - name: Cache dependencies
+      - name: Cache Cypress binary
         uses: actions/cache@v2
         with:
           path: |
             node_modules
+            ~/.cache/Cypress
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: | 
-           ${{ runner.os }}-node-
+          restore-keys: |
+            ${{ runner.os }}-node-
 
-      - name: Check if dependencies need to be installed
-        run: |
-          if [ -d "node_modules" ]; then
-            echo "Dependencies already installed."
-          else
-            echo "Installing dependencies..."
-            npm install
-          fi
+      - name: Install dependencies
+        run: npm install
           
       - name: Create .env file
         run: echo "BASE_URL= ${{ secrets.BASE_URL }}" > .env
