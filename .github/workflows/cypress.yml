@@ -21,5 +21,10 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Create .env file
+        run: echo "BASE_URL= ${{ secrets.BASE_URL }}" > .env
+
       - name: Run Cypress tests
         run: npm run cy:run
+        env:
+          BASE_URL: ${{ secrets.BASE_URL }}
