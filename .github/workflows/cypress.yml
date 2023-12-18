@@ -17,10 +17,25 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 14
+          
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: | 
+           ${{ runner.os }}-node-
 
-      - name: Install dependencies
-        run: npm install
-
+      - name: Check if dependencies need to be installed
+        run: |
+          if [ -d "node_modules" ]; then
+            echo "Dependencies already installed."
+          else
+            echo "Installing dependencies..."
+            npm install
+          fi
+          
       - name: Create .env file
         run: echo "BASE_URL= ${{ secrets.BASE_URL }}" > .env
 
