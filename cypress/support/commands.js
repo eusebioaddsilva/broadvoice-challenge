@@ -41,7 +41,7 @@ Cypress.Commands.add('validateBookDetails', (label, expectedValue) => {
 
   Cypress.Commands.add('validateTextsInList', (divClass, texts) => {
     cy.wait(1000)
-    cy.get(`.${divClass}`).within(() => {
+    cy.get(`.${divClass}`).first().within(() => {
       cy.get('ul li a').each(($a, index) => {
         cy.get($a).should('have.text', texts[index]);
       });
