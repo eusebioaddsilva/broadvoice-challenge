@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "cy:run": "cypress run",
-    "cy:open": "cypress open",
-    "cy:headless": "cypress run --headless"
+    "cy:open": "cypress open"
   },
   "keywords": [],
   "author": "",

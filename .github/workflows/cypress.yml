@@ -36,6 +36,6 @@ jobs:
         run: echo "BASE_URL= ${{ secrets.BASE_URL }}" > .env
 
       - name: Run Cypress tests
-        run: npm run cy:run --headless
+        run: npm run cy:run
         env:
           BASE_URL: ${{ secrets.BASE_URL }}
